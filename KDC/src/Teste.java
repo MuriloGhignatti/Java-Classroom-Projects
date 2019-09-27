@@ -1,23 +1,24 @@
 public class Teste {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
         Usuario Bob = new Usuario("Bob"); // Cria um Usuario
         Usuario Alice = new Usuario("Alice"); // Cria um Usuario
         Usuario Felipe = new Usuario("Felipe"); // Cria um Usuario
 
-        Bob.ImprimirKey(); //Imprime a KEY do Usuario
-        Alice.ImprimirKey(); //Imprime a KEY do Usuario
+        KDC.SKey_Gen("Bob","Alice");
 
-        String chave = KDC.SKey_Gen("Bob","Alice"); // Gera a K_S entre dois usuarios
-        String texto = "Zap No Chama"; // Texto aleatorio para cifrar
+        KDC.SKey_Send("Bob","Alice");
 
-        byte[] Cifrado = AES.Encrypt(chave,texto); // Texto Cifrado
+        KDC.ImprimirSKey();
 
-         String Decifrado = AES.Decrypt(chave,Cifrado); // Texto Decifrado
+        Bob.sendS_Key(Alice);
 
-        System.out.println("Chave: " + chave + "\n" + "Texto Cifrado: " + Cifrado + "\n" + "Texto Decifrado: " + Decifrado); //Printa toda a baboseira anterior
+        Bob.ImprimirKey();
+        Alice.ImprimirKey();
 
+        Bob.ImprimirSKey();
+        Alice.ImprimirSKey();
     }
 
 }

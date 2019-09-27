@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Usuario {
     private String nome;
     private String Key;
-    private String S_Key;
+    private String Clean_Key;
+    private ArrayList<byte[]> S_Key_Cripto = new ArrayList<byte[]>();
 
     public Usuario(String nome){
         this.nome = nome;
@@ -22,9 +24,28 @@ public class Usuario {
         return sb.toString();
     } // Gera a CHAVE PRIVADA
 
+    public void addS_Key(byte[] Key){
+        S_Key_Cripto.add(Key);
+    }
+
+    public void addS_Key_Clean(byte[] Key) throws Exception{
+       Clean_Key = AES.Decrypt(this.Key,Key);
+    }
+
+    public void sendS_Key(Usuario Destinatario) throws Exception{
+        Destinatario.addS_Key(this.S_Key_Cripto.get(1));
+        Destinatario.addS_Key_Clean(Destinatario.S_Key_Cripto.get(0));
+        this.addS_Key_Clean(this.S_Key_Cripto.get(0));
+    }
+
     public void ImprimirKey(){
         System.out.println("Chave do(a) " + this.nome + ": " +this.Key);
     } // Imprime a CHAVE PRIVADA
+
+    public void ImprimirSKey(){
+        System.out.println("Chave Criptografada do " + this.getNome() + " " + this.S_Key_Cripto.get(0));
+        System.out.println("Chave Descriptografada do " + this.getNome() + " " + this.Clean_Key);
+    }
 
     public String getNome(){
         return this.nome;
