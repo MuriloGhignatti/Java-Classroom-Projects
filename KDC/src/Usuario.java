@@ -5,6 +5,9 @@ public class Usuario {
     private String nome;
     private String Key;
     private String Clean_Key;
+    private int myNounce;
+    private int myNew;
+    private int Checker;
     private ArrayList<byte[]> S_Key_Cripto = new ArrayList<byte[]>();
 
     public Usuario(String nome){
@@ -54,4 +57,33 @@ public class Usuario {
     public String getKey(){
         return this.Key;
     } // Retorna a Key
+
+    public void Nounce(){
+        Random random = new Random();
+        this.myNounce = random.nextInt();
+    }
+
+    public void Func(){
+        Random random = new Random();
+        switch (Checker){
+            case 0:
+                this.myNew = 450 + this.myNounce;
+                break;
+            case 1:
+                this.myNew = this.myNounce/5;
+            case 2:
+                this.myNew = this.myNounce * 3;
+            case 3:
+                this.myNew = this.myNounce - 457;
+        }
+    }
+
+    public boolean checkNew(Usuario Destinatario){
+        if(Destinatario.myNew == this.myNew);
+    }
+
+    public void sendNounce(Usuario Destinatario){
+        Destinatario.myNounce = this.myNounce;
+
+    }
 }
