@@ -7,7 +7,6 @@ public class Usuario {
     private String Clean_Key;
     private int myNounce;
     private int myNew;
-    private int Checker;
     private ArrayList<byte[]> S_Key_Cripto = new ArrayList<byte[]>();
 
     public Usuario(String nome){
@@ -63,8 +62,7 @@ public class Usuario {
         this.myNounce = random.nextInt();
     }
 
-    public void Func(){
-        Random random = new Random();
+    public void Func(int Checker){
         switch (Checker){
             case 0:
                 this.myNew = 450 + this.myNounce;
@@ -79,11 +77,47 @@ public class Usuario {
     }
 
     public boolean checkNew(Usuario Destinatario){
-        if(Destinatario.myNew == this.myNew);
+        if(Destinatario.myNew == this.myNew) return true;
+        return false;
     }
 
     public void sendNounce(Usuario Destinatario){
         Destinatario.myNounce = this.myNounce;
 
     }
-}
+
+    public void startConversation(Usuario Destinatario) throws Exception{
+
+        int Checker = new Random().nextInt(3);
+
+        KDC.SKey_Gen(this.getNome(),Destinatario.getNome());
+
+        KDC.SKey_Send(this.getNome(),Destinatario.getNome());
+
+        this.sendS_Key(Destinatario);
+
+        Destinatario.Nounce();
+
+        Destinatario.Func(Checker);
+
+        Destinatario.sendNounce(this);
+
+        this.Func(Checker);
+
+       boolean Nounce = Destinatario.checkNew(this);
+
+       if(Nounce){
+           System.out.println("Mensagem Enviada com sucesso");
+       }
+       this.ImprimirTudo(Checker);
+       Destinatario.ImprimirTudo(Checker);
+        }
+
+    public void ImprimirTudo(int Checker) {
+        System.out.println(Checker);
+        System.out.println(this.getNome() + " chave de sessão: " + this.Clean_Key);
+        System.out.println(this.getNome() + " nounce: " + this.myNounce);
+        System.out.println(this.getNome() + " new: " + this.myNew);
+
+    }
+    }
