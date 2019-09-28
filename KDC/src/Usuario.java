@@ -30,21 +30,21 @@ public class Usuario {
         S_Key_Cripto.add(Key);
     }
 
-    public void addS_Key_Clean(byte[] Key) throws Exception{
+    private void addS_Key_Clean(byte[] Key) throws Exception{
        Clean_Key = AES.Decrypt(this.Key,Key);
     }
 
-    public void sendS_Key(Usuario Destinatario) throws Exception{
+    private void sendS_Key(Usuario Destinatario) throws Exception{
         Destinatario.addS_Key(this.S_Key_Cripto.get(1));
         Destinatario.addS_Key_Clean(Destinatario.S_Key_Cripto.get(0));
         this.addS_Key_Clean(this.S_Key_Cripto.get(0));
     }
 
-    public void ImprimirKey(){
+    private void ImprimirKey(){
         System.out.println("Chave do(a) " + this.nome + ": " +this.Key);
     } // Imprime a CHAVE PRIVADA
 
-    public void ImprimirSKey(){
+    private void ImprimirSKey(){
         System.out.println("Chave Criptografada do " + this.getNome() + " " + this.S_Key_Cripto.get(0));
         System.out.println("Chave Descriptografada do " + this.getNome() + " " + this.Clean_Key);
     }
@@ -57,12 +57,12 @@ public class Usuario {
         return this.Key;
     } // Retorna a Key
 
-    public void Nounce(){
+    private void Nounce(){
         Random random = new Random();
         this.myNounce = random.nextInt();
     }
 
-    public void Func(int Checker){
+    private void Func(int Checker){
         switch (Checker){
             case 0:
                 this.myNew = 450 + this.myNounce;
@@ -76,12 +76,12 @@ public class Usuario {
         }
     }
 
-    public boolean checkNew(Usuario Destinatario){
+    private boolean checkNew(Usuario Destinatario){
         if(Destinatario.myNew == this.myNew) return true;
         return false;
     }
 
-    public void sendNounce(Usuario Destinatario){
+    private void sendNounce(Usuario Destinatario){
         Destinatario.myNounce = this.myNounce;
 
     }
@@ -90,9 +90,7 @@ public class Usuario {
 
         int Checker = new Random().nextInt(3);
 
-        KDC.SKey_Gen(this.getNome(),Destinatario.getNome());
-
-        KDC.SKey_Send(this.getNome(),Destinatario.getNome());
+        KDC.userChecker(this.getNome(),AES.Encrypt(this.getKey(),this.getNome()),AES.Encrypt(this.getKey(),Destinatario.getNome()));
 
         this.sendS_Key(Destinatario);
 
@@ -104,16 +102,16 @@ public class Usuario {
 
         this.Func(Checker);
 
-       boolean Nounce = Destinatario.checkNew(this);
+        boolean Nounce = Destinatario.checkNew(this);
 
-       if(Nounce){
-           System.out.println("Mensagem Enviada com sucesso");
-       }
-       this.ImprimirTudo(Checker);
-       Destinatario.ImprimirTudo(Checker);
+        if(Nounce){
+            System.out.println("Mensagem Enviada com sucesso");
         }
+        this.ImprimirTudo(Checker);
+        Destinatario.ImprimirTudo(Checker);
+    }
 
-    public void ImprimirTudo(int Checker) {
+    private void ImprimirTudo(int Checker) {
         System.out.println(Checker);
         System.out.println(this.getNome() + " chave de sessão: " + this.Clean_Key);
         System.out.println(this.getNome() + " nounce: " + this.myNounce);

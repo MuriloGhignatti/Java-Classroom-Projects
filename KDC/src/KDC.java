@@ -4,13 +4,31 @@ import java.util.Random;
 
 public class KDC {
     private static String S_Key;
-    public static ArrayList<Usuario> Keys = new ArrayList<Usuario>(); // Array dos Usuarios CRIADOS
+    private static ArrayList<Usuario> Keys = new ArrayList<Usuario>(); // Array dos Usuarios CRIADOS
 
     public static void addUser(Usuario user){
         Keys.add(user);
     } // Adiciona um Usuario na Array de Usuarios
 
-    public static String SKey_Gen(String Remetente, String Destinatario) {
+    public static void userChecker(String Remetente, byte[] CRemetente, byte[] CDestinatario) throws Exception{
+        for(Usuario i:Keys){
+            if(i.getNome().equals(Remetente)){
+                if(i.getNome().equals(AES.Decrypt(i.getKey(),CRemetente))){
+                    for(Usuario j: Keys){
+                        if(j.getNome().equals(AES.Decrypt(i.getKey(),CDestinatario))){
+                            KDC.SKey_Gen(i.getNome(),j.getNome());
+
+                            KDC.SKey_Send(i.getNome(),j.getNome());
+
+                            System.out.println("Usuario Verificado Com Sucesso!");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static String SKey_Gen(String Remetente, String Destinatario) {
         Random random = new Random();
         //String CHARACTERS = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
         String CHARACTERS = "";
@@ -27,7 +45,7 @@ public class KDC {
         return sb.toString();
     } // Gera a K_S
 
-    public static void SKey_Send(String Destinatario,String Contato) throws Exception{
+    private static void SKey_Send(String Destinatario,String Contato) throws Exception{
         for(Usuario i: Keys){
             if(i.getNome() == Destinatario){
                 i.addS_Key(AES.Encrypt(i.getKey(),S_Key));
@@ -39,7 +57,7 @@ public class KDC {
 
     }
 
-    public static void ImprimirSKey(){
+    private static void ImprimirSKey(){
         System.out.println("Session Key: " + S_Key);
     }
 }
