@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d6b22024-94ea-4f09-aa5e-4bad7c39591d" name="Default Changelist" comment="Added the S_Key sending in between Users">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KDC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KDC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teste.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Usuario.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,6 +78,7 @@
       <workItem from="1569699623467" duration="3059000" />
       <workItem from="1569705552068" duration="160000" />
       <workItem from="1569705739877" duration="22000" />
+      <workItem from="1569705833080" duration="812000" />
     </task>
     <servers />
   </component>

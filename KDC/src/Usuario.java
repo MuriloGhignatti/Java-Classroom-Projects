@@ -90,28 +90,31 @@ public class Usuario {
 
         int Checker = new Random().nextInt(3);
 
-        if(KDC.userChecker(this.getNome(),AES.Encrypt(this.getKey(),this.getNome()),AES.Encrypt(this.getKey(),Destinatario.getNome()))) {
+        boolean userChekcer = requestKDCuserChecker(Destinatario);
 
-            this.sendS_Key(Destinatario);
+        if(!userChekcer) System.out.println("Usuario ou Destinatario Invalido");
 
-            Destinatario.Nounce();
+        this.sendS_Key(Destinatario);
 
-            Destinatario.Func(Checker);
+        Destinatario.Nounce();
 
-            Destinatario.sendNounce(this);
+        Destinatario.Func(Checker);
 
-            this.Func(Checker);
+        Destinatario.sendNounce(this);
 
-            boolean Nounce = Destinatario.checkNew(this);
+        this.Func(Checker);
 
-            if (Nounce) {
-                System.out.println("Mensagem Enviada com sucesso");
-            }
-            this.ImprimirTudo(Checker);
-            Destinatario.ImprimirTudo(Checker);
+        boolean Nounce = Destinatario.checkNew(this);
+
+        if (Nounce) {
+            System.out.println("Mensagem Enviada com sucesso");
         }
+        this.ImprimirTudo(Checker);
+        Destinatario.ImprimirTudo(Checker);
+    }
 
-        System.out.println("Usuario ou Destinatario Invalido");
+    private boolean requestKDCuserChecker(Usuario Destinatario) throws Exception{
+        return KDC.userChecker(this.getNome(),AES.Encrypt(this.getKey(),this.getNome()),AES.Encrypt(this.getKey(),Destinatario.getNome()));
     }
 
     private void ImprimirTudo(int Checker) {
