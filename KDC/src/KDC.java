@@ -10,7 +10,8 @@ public class KDC {
         Keys.add(user);
     } // Adiciona um Usuario na Array de Usuarios
 
-    public static void userChecker(String Remetente, byte[] CRemetente, byte[] CDestinatario) throws Exception{
+    public static boolean userChecker(String Remetente, byte[] CRemetente, byte[] CDestinatario) throws Exception{
+        boolean Result = false;
         for(Usuario i:Keys){
             if(i.getNome().equals(Remetente)){
                 if(i.getNome().equals(AES.Decrypt(i.getKey(),CRemetente))){
@@ -21,11 +22,14 @@ public class KDC {
                             KDC.SKey_Send(i.getNome(),j.getNome());
 
                             System.out.println("Usuario Verificado Com Sucesso!");
+
+                            Result = true;
                         }
                     }
                 }
             }
         }
+        return Result;
     }
 
     private static String SKey_Gen(String Remetente, String Destinatario) {
