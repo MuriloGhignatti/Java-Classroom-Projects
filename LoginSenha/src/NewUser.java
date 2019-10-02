@@ -43,7 +43,6 @@ public class NewUser {
             bufferedWriter.write(this.login + ":" + hashPass(this.pass)+"\n");
             bufferedWriter.close();
             bufferedReader.close();
-            System.out.println(this.login + ":" + this.pass);
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();
