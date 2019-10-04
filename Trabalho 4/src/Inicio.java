@@ -37,8 +37,6 @@ public class Inicio {
 
             System.out.print("Nome: ");
             String name = in.next();
-            //Usuario1 = new Usuario(name);
-            //users.add(Usuario1);
             users.add(new Usuario(name));
             init = true;
         }
@@ -55,8 +53,6 @@ public class Inicio {
             case 1:
                 System.out.print("Nome Do Novo Usuario: ");
                 String User = in.next();
-                //Usuario2 = new Usuario(User);
-                //users.add(Usuario2);
                 users.add(new Usuario(User));
                 StartReading();
             case 2:
