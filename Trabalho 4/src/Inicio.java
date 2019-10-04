@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class Inicio {
     private static ArrayList<Usuario> users = new ArrayList();
     private static Boolean init = false;
-    private static Usuario Usuario1;
-    private static Usuario Usuario2;
     public Inicio() {
     }
 
     public static void main(String[] args) {
 
         StartReading();
+
+        //teste();
 
     }
 
