@@ -17,6 +17,9 @@ public class Main {
          */
         Choices();
 
+        //BruteCrack.CrackAllUsers();
+        BruteCrack.Crack("9f28fe620274a36149f15e302cceaf7c");
+
     }
 
     public static void Choices() throws Exception{
@@ -24,7 +27,7 @@ public class Main {
         System.out.println("[0] Criar Novo Usuario");
         System.out.println("[1] Login");
         System.out.println("[2] Sair");
-        System.out.println("Escolha Um Numero: ");
+        System.out.print("Escolha Um Numero: ");
         int choice = in.nextInt();
         switch(choice){
             case 0:
@@ -37,7 +40,6 @@ public class Main {
                 User.CreateNewUser();
                 Users.add(User);
                 Choices();
-                break;
             case 1:
                 in.nextLine();
                 System.out.print("Login: ");

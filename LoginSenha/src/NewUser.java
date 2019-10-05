@@ -16,7 +16,7 @@ public class NewUser {
     public NewUser(String login, String pass) {
         this.name = login;
         this.login = login.substring(0,4);
-        this.pass = pass.substring(0,4);
+        this.pass = pass.substring(0,4) + "!)&%";
     }
 
     public boolean CreateNewUser() throws Exception{
@@ -52,7 +52,7 @@ public class NewUser {
 
     public boolean AuthUser(String login, String pass) throws Exception{
         String localLogin = login.substring(0,4);
-        String localPass = hashPass(pass.substring(0,4));
+        String localPass = hashPass(pass.substring(0,4) + "!)&%");
         String Login = "";
         String Pass = "";
 
