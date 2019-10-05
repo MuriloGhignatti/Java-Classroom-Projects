@@ -27,41 +27,36 @@ public class Usuario {
             for(Usuario i: users_created){
                 if(i.Name().equals(contato)){
                     checker ++;
+                    i.checker ++;
                     i.IniciarConversa(this.nome);
                 }
             }
         }
-
+        checker = 0;
     }
 
     public void EnviarMensagem(String destinatario,String mensagem){
-        int index = 0;
-        int index2 = 0;
         for(Conversa i: conversas) {
-            String name = i.Name();
-            if(destinatario.equals(name)) index = i;
-        }
-        for(int j = 0; j < users_created.size();j++){
-            Usuario destination = users_created.get(j);
-            if(destination.Name().equals(destinatario)) index2 = j;
+            if(i.Name().equals(destinatario)){
+                i.AddMensagem(mensagem,true);
             }
-        conversas.get(index).AddMensagem(mensagem,false);
-        users_created.get(index2).ReceberMensagem(this.nome,mensagem);
+        }
+        for(Usuario i: users_created){
+            if(i.Name().equals(destinatario)){
+                i.ReceberMensagem(this.nome,mensagem);
+            }
+        }
     }
 
     public void ReceberMensagem(String remetente, String mensagem){
         for(Conversa i: conversas) {
-            String name = i.Name();
-            if(remetente.equals(name)) i.AddMensagem(mensagem,true);;
+            if(remetente.equals(i.Name())) i.AddMensagem(mensagem,false);
         }
-        }
+    }
 
     public void ImprimirMensagens(String contato){
-        int index = 0;
-        for(int i = 0; i < conversas.size();i++) {
-            String name = conversas.get(i).Name();
-            if(contato.equals(name)) index = i;
+        for(Conversa i: conversas){
+            if(contato.equals(i.Name())) System.out.println(this.nome + " " + i.ImprimirMensagens());
         }
-        System.out.println(contato + " " + conversas.get(index).ImprimirMensagens());
     }
 }

@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class Inicio {
     private static ArrayList<Usuario> users = new ArrayList();
     private static Boolean init = false;
-    private static Usuario Usuario1;
-    private static Usuario Usuario2;
     public Inicio() {
     }
 
     public static void main(String[] args) {
 
         StartReading();
+
+        //teste();
 
     }
 
@@ -36,9 +36,7 @@ public class Inicio {
         if (init != true) {
 
             System.out.print("Nome: ");
-            String name = in.next();
-            //Usuario1 = new Usuario(name);
-            //users.add(Usuario1);
+            String name = in.nextLine();
             users.add(new Usuario(name));
             init = true;
         }
@@ -54,9 +52,8 @@ public class Inicio {
         switch(choice) {
             case 1:
                 System.out.print("Nome Do Novo Usuario: ");
-                String User = in.next();
-                //Usuario2 = new Usuario(User);
-                //users.add(Usuario2);
+                in.nextLine();
+                String User = in.nextLine();
                 users.add(new Usuario(User));
                 StartReading();
             case 2:
@@ -65,9 +62,11 @@ public class Inicio {
                 StartReading();
             case 3:
                 System.out.print("Quem Quer Iniciar Uma Conversa? ");
-                String InitialUser = in.next();
+                in.nextLine();
+                String InitialUser = in.nextLine();
+                in.nextLine();
                 System.out.print("Com Quem Deseja Iniciar Uma Conversa? ");
-                String Conversa = in.next();
+                String Conversa = in.nextLine();
                 Usuario user = null;
                 for(Usuario i: users){
                     if(i.Name().equals(InitialUser)) user = i;
@@ -76,7 +75,8 @@ public class Inicio {
                 StartReading();
             case 4:
                 System.out.print("Quem Quer Ver as Conversas? ");
-                String convUser =  in.next();
+                in.nextLine();
+                String convUser =  in.nextLine();
                 Usuario localUser = null;
                 for(Usuario i: users){
                     if(i.Name().equals(convUser)) localUser = i;
@@ -85,11 +85,14 @@ public class Inicio {
                 StartReading();
             case 5:
                 System.out.print("Quem Quer Enviar Mensagem? ");
-                String remetente = in.next();
+                in.nextLine();
+                String remetente = in.nextLine();
+                in.nextLine();
                 System.out.print("Para quem você quer enviar uma mensagem? ");
-                String msgTo = in.next();
+                String msgTo = in.nextLine();
+                in.nextLine();
                 System.out.print("Mensagem: ");
-                String msg = in.next();
+                String msg = in.nextLine();
                 Usuario remet = null;
                 for(Usuario i: users){
                     if(i.Name().equals(remetente)) remet = i;
@@ -98,9 +101,11 @@ public class Inicio {
                 StartReading();
             case 6:
                 System.out.print("Quem Gostaria de ver as mensagens? ");
-                String msgSee = in.next();
+                in.nextLine();
+                String msgSee = in.nextLine();
+                in.nextLine();
                 System.out.print("Você gostaria de ver as mensagens de qual contato? ");
-                String mensagens = in.next();
+                String mensagens = in.nextLine();
                 Usuario userMSG = null;
                 for(Usuario i: users){
                     if(i.Name().equals(msgSee)) userMSG = i;
