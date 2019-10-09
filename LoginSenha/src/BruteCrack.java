@@ -124,10 +124,11 @@ public class BruteCrack
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         String st;
-        while ((st = bufferedReader.readLine()) != null){
-
-            String pass = BruteCrack.Crack(st.substring(5));
-            System.out.println("Usuario: " + st.substring(0,4) + "\n Senha: " + pass);
+        for(int i = 0; i < 4;i++){
+            if((st = bufferedReader.readLine()) != null){
+                String pass = BruteCrack.Crack(st.substring(5));
+                System.out.println("Usuario: " + st.substring(0,4) + "\n Senha: " + pass);
+            }
         }
         bufferedReader.close();
     }

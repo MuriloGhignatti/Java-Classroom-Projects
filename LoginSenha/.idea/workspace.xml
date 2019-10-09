@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd02d98c-58a1-4589-b93b-ad71ba573826" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BruteCrack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BruteCrack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BruteCrack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NewUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NewUser.java" afterDir="false" />
     </list>
@@ -88,6 +87,8 @@
       <workItem from="1569845799352" duration="6110000" />
       <workItem from="1569985380889" duration="268000" />
       <workItem from="1570302216176" duration="3748000" />
+      <workItem from="1570453487262" duration="1222000" />
+      <workItem from="1570551012094" duration="10000" />
     </task>
     <servers />
   </component>

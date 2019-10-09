@@ -18,7 +18,7 @@ public class Main {
         Choices();
 
         //BruteCrack.CrackAllUsers();
-        BruteCrack.Crack("9f28fe620274a36149f15e302cceaf7c");
+        //BruteCrack.Crack("9f28fe620274a36149f15e302cceaf7c");
 
     }
 

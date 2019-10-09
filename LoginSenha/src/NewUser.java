@@ -38,6 +38,8 @@ public class NewUser {
 
             if(checker){
                 System.out.println("O(a) Usuario(a) " + this.name + " Já Existe");
+                bufferedWriter.close();
+                bufferedReader.close();
                 return false;
             }
             bufferedWriter.write(this.login + ":" + hashPass(this.pass)+"\n");
