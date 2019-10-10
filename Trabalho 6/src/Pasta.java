@@ -17,10 +17,17 @@ public class Pasta {
         arquivos.add(new Arquivo(nome));
     }
 
+    public void Inserir(Arquivo nome){
+        arquivos.add(nome);
+    }
+
     public void Remover(String nome){
+        Arquivo x = null;
         for(Arquivo i: arquivos){
-            if(i.getNome().equals(nome)) arquivos.remove(i);
+            if(i.getNome().equals(nome)) x = i;
         }
+
+        arquivos.remove(x);
     }
 
     public void Listar(){
@@ -32,7 +39,7 @@ public class Pasta {
     public void Duplicar(String nome){
         int counter = 0;
         for(Arquivo i: arquivos){
-            if(i.getNome().equals(nome) || i.getNome().substring(0,nome.length()).equals(nome)) counter ++;
+            if(i.getNome().equals(nome) || i.getNome().length() >= nome.length() && i.getNome().substring(0,nome.length()).equals(nome)) counter ++;
         }
         this.Inserir(nome + String.format(" - copia(%s)", counter));
     }

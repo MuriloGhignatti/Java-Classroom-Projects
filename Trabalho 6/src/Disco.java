@@ -15,9 +15,12 @@ public class Disco {
     }
 
     public void Remover_Pasta(String nome){
+        Pasta x = null;
         for(Pasta i: pastas){
-            if(i.getNome().equals(nome)) pastas.remove(i);
+            if(i.getNome().equals(nome)) x = i;
         }
+
+        pastas.remove(x);
     }
 
     public void Listar_Pastas(){
