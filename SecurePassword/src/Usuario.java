@@ -5,12 +5,16 @@ import java.util.Random;
 public class Usuario {
     private String nome;
     private String keyVault;
-    public String userKey;
+    private String userKey;
 
     public Usuario(String nome, String keyVault) {
         this.nome = nome;
         this.keyVault = keyVault;
         this.userKey();
+    }
+
+    public void ImprimirUK(){
+        System.out.println(this.userKey);
     }
 
     private String userKey(){
@@ -30,5 +34,17 @@ public class Usuario {
         m.update(pass.getBytes(),0,pass.length());
 
         return new BigInteger(1,m.digest()).toString(16);
+    }
+
+    public byte[] Encrypt(String Mensagem) throws Exception{
+        return AES.Encrypt(this.userKey,Mensagem);
+    }
+
+    public String Decrypt(byte[] Mensagem) throws Exception{
+        return AES.Decrypt(this.userKey,Mensagem);
+    }
+
+    public boolean saveLogin(String Login, String Password){
+        return true;
     }
 }
