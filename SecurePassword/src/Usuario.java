@@ -4,17 +4,16 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Random;
 
-public class Usuario {
+public class Usuario extends Sys{
     private String nome;
     private String keyVault;
     private String userKey;
-    private String fileName = "Users.txt";
 
     public Usuario(String nome, String keyVault) throws Exception{
         this.nome = nome;
         this.keyVault = keyVault;
         this.userKey();
-        saveLogin(nome,keyVault);
+        //super.saveLogin(this.nome,this.userKey);
     }
 
     public void ImprimirUK(){
@@ -32,14 +31,6 @@ public class Usuario {
         return sb.toString();
     } // Gera a CHAVE PRIVADA
 
-    private String hashPass(String pass) throws Exception {
-        MessageDigest m = MessageDigest.getInstance("SHA-256");
-
-        m.update(pass.getBytes(),0,pass.length());
-
-        return new BigInteger(1,m.digest()).toString(16);
-    }
-
     public byte[] Encrypt(String Mensagem) throws Exception{
         return AES.Encrypt(this.userKey,Mensagem);
     }
@@ -48,14 +39,4 @@ public class Usuario {
         return AES.Decrypt(this.userKey,Mensagem);
     }
 
-    private void saveLogin(String Login, String Password) throws Exception{
-        FileWriter fileWriter = new FileWriter(fileName,true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        try{
-            bufferedWriter.write(Login + ":" + hashPass(Password) + "\n");
-        }
-        finally {
-            bufferedWriter.close();
-        }
-    }
 }
