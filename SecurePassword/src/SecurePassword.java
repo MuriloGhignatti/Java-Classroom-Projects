@@ -6,6 +6,6 @@ public class SecurePassword {
         String Decifrado = Dani.Decrypt(Cifrado);
         Dani.ImprimirUK();
         System.out.println("Texto Original: " + Texto + "\n Texto Cifrado: " + Cifrado + "\n Texto Decifrado: " + Decifrado);
-        System.out.println("Senha Salva: " + Dani.hashPass(Cifrado.toString()));
+
     }
 }
