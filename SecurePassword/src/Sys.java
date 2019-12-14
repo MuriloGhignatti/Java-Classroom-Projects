@@ -10,7 +10,7 @@ public class Sys {
     private static String fileName = "Users.txt";
 
     private static void sLogin(String Login, String Password) throws Exception, ExecaoContaExistente{
-        FileWriter fileWriter = new FileWriter(fileName,true);
+        FileWriter fileWriter = new FileWriter(fileName,true); //Append para adicionar as senhas
         FileReader fileReader = new FileReader(fileName);
 
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -19,9 +19,10 @@ public class Sys {
         try{
             String st;
             while ((st = bufferedReader.readLine()) != null){
-                if(st.substring(0,st.indexOf(":")).equals(Login)) throw new ExecaoContaExistente();
+                if(st.substring(0,st.indexOf(":")).equals(Login) && !(st.substring(0,st.indexOf(":")).equals(null)))
+                    throw new ExecaoContaExistente(); //Verifica se o Login não existe e se ele não é nulo, caso o usuario tente colocar ':' como login
             }
-            bufferedWriter.write(Login + ":" + hashPass(Password) + "\n");
+            bufferedWriter.write(Login + ":" + hashPass(Password) + "\n"); //Senha salva em hash SHA-256; "\n" p/ linha seguinte
         }
 
         catch (ExecaoLoginErrado e){
@@ -52,7 +53,6 @@ public class Sys {
 
     private static void LG(String Login, String Password) throws Exception, ExecaoLoginInvalido{
         FileReader fileReader = new FileReader(fileName);
-
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         try{

@@ -16,13 +16,17 @@ public class Usuario extends Sys{
         //super.saveLogin(this.nome,this.keyVault);
     }
 
+    public String getNome(){
+        return this.nome;
+    }
+
     public void ImprimirUK(){
         System.out.println(this.userKey);
     }
 
     private String userKey(){
         Random random = new Random();
-        String CHARACTERS = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+        String CHARACTERS = "!/\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
         StringBuilder sb = new StringBuilder(16);
         for (int i = 0; i < 16; i++) {
             sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
