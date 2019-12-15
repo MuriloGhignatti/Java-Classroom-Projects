@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 /*
@@ -48,4 +49,28 @@ public class Cofre {
 
         return new BigInteger(1,m.digest()).toString(16);
     }
+
+    public String ShowSite(String site) throws Exception{
+        FileReader fileReader = new FileReader(this.fileName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        try{
+            String st;
+            while ((st = bufferedReader.readLine()) != null){
+                if(st.substring(0,st.indexOf(":")).equals(site)){
+                    String webSite = st.substring(0,st.indexOf(":"));
+                    String login = st.substring(st.indexOf(":") + 1,st.lastIndexOf(":"));
+                    String passC = st.substring(st.lastIndexOf(":") + 1);
+                    byte[] test = passC.getBytes(StandardCharsets.UTF_8);
+                    String savedPass = Sys.getSavePass(User.getNome(),User.getKeyVault());
+                    String pass = AES.Decrypt(savedPass,test);
+                    return "Site: " + webSite + "\n Login: " + login + "\n Senha: " + pass;
+                }
+            }
+        }
+
+        finally {
+            bufferedReader.close();
+        }
+        return "Something Went Wrong";
+    } //Tem Algo Errado Aqui Por Causa do Algo Errado no Sys getSavePass
 }

@@ -13,7 +13,11 @@ public class Usuario extends Sys{
         this.nome = nome;
         this.keyVault = keyVault;
         this.userKey();
-        //super.saveLogin(this.nome,this.keyVault);
+        //super.saveLogin(this.nome,this.keyVault,this.userKey);
+    }
+
+    public String getKeyVault(){
+        return this.keyVault;
     }
 
     public String getNome(){
@@ -42,5 +46,4 @@ public class Usuario extends Sys{
     public String Decrypt(byte[] Mensagem) throws Exception{
         return AES.Decrypt(this.userKey,Mensagem);
     }
-
 }
