@@ -23,7 +23,9 @@ public class Sys {
                 if(st.substring(0,st.indexOf(":")).equals(Login) && !(st.substring(0,st.indexOf(":")).equals(null)))
                     throw new ExecaoContaExistente(); //Verifica se o Login não existe e se ele não é nulo, caso o usuario tente colocar ':' como login
             }
-            bufferedWriter.write(Login + ":" + hashPass(Password) + ":" + AES.Encrypt(Salt(Password),key) + "\n"); //Senha salva em hash SHA-256; "\n" p/ linha seguinte
+            String salted = Salt(Password);
+            byte[] pwd =  AES.Encrypt(salted,key);
+            bufferedWriter.write(Login + ":" + hashPass(Password) + ":" + pwd + "\n"); //Senha salva em hash SHA-256; "\n" p/ linha seguinte
         }
 
         catch (ExecaoLoginErrado e){
