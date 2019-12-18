@@ -1,13 +1,8 @@
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class SecurePassword {
     public static void main(String[] args) throws Exception{
-        byte[] OCrypto = AES.Encrypt("Xablau0wefjkewmo","\".k2Z.q/9m>kDvL%");
-        String Cript  = OCrypto.toString();
-        byte[] test = Cript.getBytes(StandardCharsets.UTF_8);
-        byte[] Crypto = "[B@9e89d68".getBytes(StandardCharsets.UTF_8);
-        System.out.println(AES.Decrypt("Xablau0wefjkewmo",Crypto));
-        /*
         try{
             Usuario Dani = new Usuario("Daniela","Xablau");
             Usuario Murilo = new Usuario("Muriloghignatti","1234567890-874585472565854262547862");
@@ -15,8 +10,8 @@ public class SecurePassword {
             String Texto = "Opa";
             byte[] Cifrado = Dani.Encrypt(Texto);
             String Decifrado = Dani.Decrypt(Cifrado);
-            Sys.Login("Daniela","Xablau");
-            Sys.Login("Muriloghignatti","1234567890-874585472565854262547862");
+            if(Sys.Login("Daniela","Xablau")) System.out.println("Logado com Sucesso");
+            if(Sys.Login("Muriloghignatti","1234567890-874585472565854262547862")) System.out.println("Logado com Sucesso");;
             Dani.ImprimirUK();
             System.out.println("Texto Original: " + Texto + "\n Texto Cifrado: " + Cifrado +
                     "\n Texto Decifrado: " + Decifrado);
@@ -33,8 +28,6 @@ public class SecurePassword {
         catch (ExecaoSiteRegistrado e){
             System.out.println("Esse site já foi registrado");
         }
-
-         */
-
     }
+
 }

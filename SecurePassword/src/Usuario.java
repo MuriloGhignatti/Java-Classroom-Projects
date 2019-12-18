@@ -13,7 +13,7 @@ public class Usuario extends Sys{
         this.nome = nome;
         this.keyVault = keyVault;
         this.userKey();
-        //super.saveLogin(this.nome,this.keyVault,this.userKey);
+        super.saveLogin(this.nome,this.keyVault,this.userKey);
     }
 
     public String getKeyVault(){

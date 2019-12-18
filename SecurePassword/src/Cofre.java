@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Base64;
 
 /*
 Trabalhar em como salvar a UserKey de forma segura
@@ -33,7 +34,7 @@ public class Cofre {
             while ((st = bufferedReader.readLine()) != null){
                 if(st.substring(0,st.indexOf(":")).equals(Site)) throw new ExecaoSiteRegistrado();
             }
-            bufferedWriter.write(Site + ":" + Login + ":" + User.Encrypt(Password) + "\n");
+            bufferedWriter.write(Site + ":" + Login + ":" + Base64.getEncoder().encodeToString(User.Encrypt(Password)) + "\n");
         }
 
         finally {
@@ -60,7 +61,7 @@ public class Cofre {
                     String webSite = st.substring(0,st.indexOf(":"));
                     String login = st.substring(st.indexOf(":") + 1,st.lastIndexOf(":"));
                     String passC = st.substring(st.lastIndexOf(":") + 1);
-                    byte[] test = passC.getBytes(StandardCharsets.UTF_8);
+                    byte[] test = Base64.getDecoder().decode(passC);
                     String savedPass = Sys.getSavePass(User.getNome(),User.getKeyVault());
                     String pass = AES.Decrypt(savedPass,test);
                     return "Site: " + webSite + "\n Login: " + login + "\n Senha: " + pass;
