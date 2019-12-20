@@ -1,15 +1,11 @@
+import java.io.*;
 import java.util.ArrayList;
 
-public class Vault {
+public class Vault implements Serializable {
 
-    private User Usuario;
     private ArrayList<Login> Sites = new ArrayList<Login>();
 
-    public Vault(User Usuario){
-        this.Usuario = Usuario;
-    }
-
-    public void AddSite(Login Login){
-        Sites.add(Login);
+    public void AddSite(String Site, String Login, byte[] Password){
+        Sites.add(new Login(Site, Login, Password));
     }
 }
