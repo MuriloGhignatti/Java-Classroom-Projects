@@ -10,4 +10,16 @@ public class Login implements Serializable {
         this.Login = Login;
         this.Password = Password;
     }
+
+    public String getSite(){
+        return this.Site;
+    }
+
+    public String getLogin(){
+        return this.Login;
+    }
+
+    public byte[] getPassword() {
+        return Password;
+    }
 }

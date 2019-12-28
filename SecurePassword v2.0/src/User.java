@@ -13,6 +13,7 @@ public class User implements Serializable {
     private transient String Vault_Password;
     private byte[] User_Key;
     private Vault Vault;
+    private transient boolean Logged = false;
 
     public User(String Login, String Password) throws Exception {
         this.Name = Login;
@@ -20,10 +21,27 @@ public class User implements Serializable {
         this.HVault_Password = hashPass(Password);
         this.User_Key = generateUserKey();
         this.Vault = new Vault();
+        Sys.RegisterUser(this);
     }
 
     public String getName() {
         return Name;
+    }
+
+    public String getHVault_Password(){
+        return this.HVault_Password;
+    }
+
+    public boolean isLogged(){
+        return this.Logged;
+     }
+
+    public void setLogged(boolean value){
+        this.Logged = value;
+    }
+
+    public void setVault_Password(String Pass){
+        this.Vault_Password = Pass;
     }
 
     private byte[] generateUserKey() throws Exception {
@@ -51,6 +69,25 @@ public class User implements Serializable {
     }
 
     public void SaveLogin(String Site, String Login, String Password) throws Exception {
-        this.Vault.AddSite(Site, Login, AES.Encrypt(Salt(this.Vault_Password),Password));
+        if(Logged) this.Vault.AddSite(Site, Login, AES.Encrypt(Salt(this.Vault_Password),Password));
+    }
+
+    public void SeeSavedLogin(String Site) throws Exception { //Fazer metodo para setar a Vault-Password se o login for bem sucedido
+        if(Logged){
+           Login currentSite = Vault.SearchSite(Site);
+           String WebSite = currentSite.getSite();
+           String Login = currentSite.getLogin();
+           byte[] cryptoPassword = currentSite.getPassword();
+           String Password = AES.Decrypt(Salt(this.Vault_Password),cryptoPassword);
+            System.out.println("Site: " + WebSite + "\n Login: " + Login + "\n Senha: " + Password);
+        }
+    }
+
+    public void RemoveSite(String Site){
+        Vault.RemoveSite(Site);
+    }
+
+    public void mostrarSites(){
+        Vault.mostrarSites();
     }
 }

@@ -10,14 +10,14 @@ public class Users implements Serializable {
         }
         catch (ClassNotFoundException e){
             Users = new ArrayList<User>();
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         catch (FileNotFoundException e){
             Users = new ArrayList<User>();
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         catch (IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
